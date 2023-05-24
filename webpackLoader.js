@@ -1,7 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 // const { validateOptions } = require('schema-utils');
-<<<<<<< HEAD
 // const schema = require("./schema.js");
 // const customComponents = require('../../form/src/app/customcomponent/angora.components.js')
 // const { getOptions } = require('loader-utils')
@@ -16,15 +15,6 @@ module.exports = function myLoader(source) {
   // source = `${source}`
   const options = this.getOptions();
   // console.log('before AST func source: ', source);
-=======
-const schema = require("./schema.js");
-// const customComponents = require('../../form/src/app/customcomponent/angora.components.js')
-// const { getOptions } = require('loader-utils')
-
-module.exports = function myLoader(source) {
-  const options = this.getOptions();
-  console.log(options);
->>>>>>> 12953d0c65f8f14fc5fdb74684cd0eb077502761
 
   // validateOptions(schema, options, 'My Loader');
 
@@ -47,7 +37,6 @@ module.exports = function myLoader(source) {
     console.log(`Generated file: ${filePath}`);
   });
 
-<<<<<<< HEAD
   // insert app.module insertion logic
 
   const code = fs.readFileSync("./index.ts").toString();
@@ -89,8 +78,6 @@ module.exports = function myLoader(source) {
   console.log("fs write success");
   // console.log('this.resourcePath: ', this.resourcePath)
   // return `${newCode}`;
-=======
->>>>>>> 12953d0c65f8f14fc5fdb74684cd0eb077502761
   return source;
 };
 
