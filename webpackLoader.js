@@ -1,13 +1,20 @@
 const fs = require("fs");
 const path = require("path");
 // const { validateOptions } = require('schema-utils');
-const schema = require("./schema.js");
+// const schema = require("./schema.js");
 // const customComponents = require('../../form/src/app/customcomponent/angora.components.js')
 // const { getOptions } = require('loader-utils')
 
+// module part requires
+const parser = require("@babel/parser");
+const traverse = require("@babel/traverse").default;
+const generator = require("@babel/generator").default;
+const t = require("@babel/types");
+
 module.exports = function myLoader(source) {
+  // source = `${source}`
   const options = this.getOptions();
-  console.log(options);
+  // console.log('before AST func source: ', source);
 
   // validateOptions(schema, options, 'My Loader');
 
@@ -30,6 +37,47 @@ module.exports = function myLoader(source) {
     console.log(`Generated file: ${filePath}`);
   });
 
+  // insert app.module insertion logic
+
+  const code = fs.readFileSync("./index.ts").toString();
+  console.log("code: ", code);
+
+  const ast = parser.parse(code, {
+    sourceType: "module",
+    plugins: ["typescript", "decorators-legacy"],
+  });
+
+  traverse(ast, {
+    Decorator(path) {
+      if (
+        t.isCallExpression(path.node.expression) &&
+        t.isIdentifier(path.node.expression.callee, { name: "NgModule" })
+      ) {
+        const ngModuleArg = path.node.expression.arguments[0];
+
+        if (t.isObjectExpression(ngModuleArg)) {
+          const declarationsProp = ngModuleArg.properties.find((prop) =>
+            t.isIdentifier(prop.key, { name: "declarations" })
+          );
+
+          if (declarationsProp && t.isArrayExpression(declarationsProp.value)) {
+            // Insert 'here' into the declarations array
+            declarationsProp.value.elements.push(t.stringLiteral("here"));
+          }
+        }
+      }
+    },
+  });
+
+  const newCode = `${generator(ast).code}`;
+  // console.log('after AST func source: ', source)
+  // console.log('newCode: ', newCode)
+
+  // console.log(`${newCode}`)
+  fs.writeFileSync(this.resourcePath, newCode);
+  console.log("fs write success");
+  // console.log('this.resourcePath: ', this.resourcePath)
+  // return `${newCode}`;
   return source;
 };
 
