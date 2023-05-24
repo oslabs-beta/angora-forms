@@ -1,0 +1,20 @@
+{
+  "name": "webpack-loader",
+  "version": "1.0.1",
+  "description": "",
+  "main": "webpackLoader.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "schema-utils": "^4.0.1"
+  },
+  "devDependencies": {
+    "loader-utils": "^3.2.1"
+  }
+}
