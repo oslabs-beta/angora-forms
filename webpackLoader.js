@@ -1,9 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-// const { validateOptions } = require('schema-utils');
-// const schema = require("./schema.js");
-// const customComponents = require('../../form/src/app/customcomponent/angora.components.js')
-// const { getOptions } = require('loader-utils')
 
 const parser = require("@babel/parser");
 const traverse = require("@babel/traverse").default;
@@ -25,10 +21,12 @@ module.exports = function myLoader(source) {
     fileNames.push(className)
 
     const fileName = `customComponent${index + 1}.ts`; // Generate a unique filename
-    imports.push(fileName.toString())
+    imports.push(fileName) 
+
+    console.log(this.resourcePath)
 
     // Create the file path using the current working directory and the filename
-    const filePath = path.resolve(process.cwd(), fileName);
+    const filePath = path.resolve(process.cwd(), fileName); // change process.cwd() to generate files into node modules?
 
     // Generate the code for the Angular class component
     const componentCode = generateAngularComponent(ComponentClass);
@@ -50,20 +48,76 @@ const ast = parser.parse(code, {
 let modified = false; // Flag to track modification
 let modifiedNgModule = null; // Store the NgModule decorator node that is modified
 
+const importedClassNames = fileNames; // Get the imported class names from the fileNames array
+const existingClassNames = new Set()
+
 // traversal through ast of app.module file
 traverse(ast, {
+  Decorator(path) {
+    // identify where new declarations will be added
+    if (
+      t.isCallExpression(path.node.expression) &&
+      t.isIdentifier(path.node.expression.callee, { name: 'NgModule' }) &&
+      !modified // Check if modification has not been applied yet
+    ) {
+      const ngModuleArg = path.node.expression.arguments[0];
+
+      if (t.isObjectExpression(ngModuleArg)) {
+        const declarationsProp = ngModuleArg.properties.find((prop) =>
+          t.isIdentifier(prop.key, { name: 'declarations' })
+        );
+
+        
+
+        if (
+          declarationsProp &&
+          t.isArrayExpression(declarationsProp.value)
+        ) {
+
+          // // Get the imported class names from the fileNames array
+          // const importedClassNames = fileNames; 
+
+          // console.log(importedClassNames)
+          // console.log(declarationsProp.value.elements.slice(-importedClassNames.length))
+
+          console.log(declarationsProp.value)
+
+          for(let i = 0; i < declarationsProp.value.elements.slice(-importedClassNames.length).length; i++){
+            existingClassNames.add(declarationsProp.value.elements.slice(-importedClassNames.length)[i].name)
+          }
+
+          // console.log(existingClassNames)
+
+          // Create an identifier for each imported class and add to the declarations array
+          importedClassNames.forEach((className) => {
+            if(!existingClassNames.has(className)){
+              const importedClassIdentifier = t.identifier(className);
+              declarationsProp.value.elements.push(importedClassIdentifier);
+            }
+            // check whether each className already exists in the declarations array
+            
+          });
+
+          modified = true; // Set the flag to indicate modification
+          modifiedNgModule = path.node; // Mark the NgModule decorator as modified
+        }
+      }
+    }
+  },
   ImportDeclaration(path) {
+    
+    
     // identify where new import declarations will be inserted
     if (
       t.isStringLiteral(path.node.source, { value: './app.component' }) &&
       !modifiedNgModule // Skip further traversal if NgModule is already modified
     ) {
-      
-      const importedClassNames = fileNames; // Get the imported class names from the fileNames array
 
       let counter = 1 // initialize counter to act as input for file name 
+      // console.log(existingClassNames)
 
       importedClassNames.forEach((className) => {
+        if(!path.scope.bindings[className]){
         // Create an import specifier for the class name
         const importSpecifier = t.importSpecifier(
           t.identifier(className),
@@ -80,41 +134,8 @@ traverse(ast, {
 
         // Insert the new import declaration after the existing one
         path.insertAfter(newImportDeclaration);
-      });
-    }
-  },
-  Decorator(path) {
-    // identify where new declarations will be added
-    if (
-      t.isCallExpression(path.node.expression) &&
-      t.isIdentifier(path.node.expression.callee, { name: 'NgModule' }) &&
-      !modified // Check if modification has not been applied yet
-    ) {
-      const ngModuleArg = path.node.expression.arguments[0];
-
-      if (t.isObjectExpression(ngModuleArg)) {
-        const declarationsProp = ngModuleArg.properties.find((prop) =>
-          t.isIdentifier(prop.key, { name: 'declarations' })
-        );
-
-        if (
-          declarationsProp &&
-          t.isArrayExpression(declarationsProp.value)
-        ) {
-
-          // Get the imported class names from the fileNames array
-          const importedClassNames = fileNames; 
-
-          // Create an identifier for each imported class and add to the declarations array
-          importedClassNames.forEach((className) => {
-            const importedClassIdentifier = t.identifier(className);
-            declarationsProp.value.elements.push(importedClassIdentifier);
-          });
-
-          modified = true; // Set the flag to indicate modification
-          modifiedNgModule = path.node; // Mark the NgModule decorator as modified
         }
-      }
+      });
     }
   },
 });
@@ -129,8 +150,6 @@ return source;
 
 function generateAngularComponent(ComponentClass) {
   const className = ComponentClass.name;
-  
-
   // Get the class methods
   const methods = Object.getOwnPropertyNames(ComponentClass.prototype);
   // Create an instance of each component class
@@ -183,16 +202,37 @@ writeValue(value: any) {
 
 // generate all methods to be added to new component
 function generateMethods(instance, methods) {
+  const typeScript = ': any'
   return (
     methods.slice(1)
       // filter through methods return only functions
       // iterate through methods and add the function to the new component in the right format
       .map((method) => {
+
         const functionCode = instance[method].toString();
-        return `${functionCode}`;
+
+        const position = functionCode.indexOf(')')
+        const params = functionCode.substring(functionCode.indexOf('('), position+1)
+         // if there are multiple parameters add : any to other parameters
+        if(functionCode[position - 1].match(/[A-Z]|[a-z]/g)){
+          return functionCode.replace(params, typescriptIfy(params))
+        } else {
+          return functionCode
+        }
       })
       .join("\n")
   );
+}
+
+// add ': any' to any number of parameters
+const typescriptIfy = (functionCode, result = '', typescript = ': any') => {
+  if(!functionCode.length){
+    return result
+  }
+  if(functionCode[0] === ',' || functionCode[0] === ')'){
+    return typescriptIfy(functionCode.slice(1), result += (typescript + functionCode[0]), typescript)
+  }
+  return typescriptIfy(functionCode.slice(1), result += functionCode[0], typescript)
 }
 
 // generate html to be added to new component
@@ -209,12 +249,17 @@ function toKebabCase(str) {
 
 // generate all properties to be added to new component
 function generateProperties(instance) {
+  const typeScript = ': any'
   const properties = Object.entries(instance)
     // iterate through the class object and add the properties to the new component
     const newProps = properties.filter((el) => el[0] !== 'template').map((el) => {
+      console.log(el[1])
+        if(el[0].toString() === 'onChange'){
+          const position = el[1].toString().indexOf(')')
+          return `${el[0]} = ${[el[1].toString().slice(0, position), typeScript, el[1].toString().slice(position)].join('')}`;
+        }
         return `${el[0]} = ${formatValue(el[1])}`;
     }).join("\n")
-
     return newProps
 }
 
