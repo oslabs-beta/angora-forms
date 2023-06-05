@@ -4,7 +4,7 @@
   "description": "",
   "main": "webpackLoader.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,9 @@
     "schema-utils": "^4.0.1"
   },
   "devDependencies": {
-    "loader-utils": "^3.2.1"
+    "@babel/preset-typescript": "^7.21.5",
+    "@types/jest": "^29.5.2",
+    "loader-utils": "^3.2.1",
+    "ts-jest": "^29.1.0"
   }
 }

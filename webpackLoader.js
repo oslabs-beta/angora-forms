@@ -6,6 +6,8 @@ const traverse = require("@babel/traverse").default;
 const generator = require("@babel/generator").default;
 const t = require("@babel/types");
 
+
+
 module.exports = function myLoader(source) {
 
   const options = this.getOptions();
@@ -273,3 +275,18 @@ function formatValue(value) {
     return value;
   }
 }
+
+
+
+module.exports = {
+  formatValue,
+  generateProperties,
+  toKebabCase,
+  generateTemplate,
+  typescriptIfy,
+  generateMethods,
+  generateAngularComponent
+};
+
+
+
