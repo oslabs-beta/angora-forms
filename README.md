@@ -1,7 +1,9 @@
 # Angora Forms
 Angora Forms is a custom form component abstraction library designed for Angular that streamlines and simplies the process of creating custom form components in Angular. 
 
-Custom form components 
+Custom form components in Angular comes with a bit of boilerplate code and Angora Forms components abstracts away 90.9% of that boilerplate code.
+
+See [our website] or below for example code comparison.
 
 ## Documentation
 The official documentation website is [website address].
@@ -177,3 +179,195 @@ Custom component files will be generated and required modifications to the app.m
 - Wayne Leung - [Github](https://github.com/waynetwleung)
 - Curtis Lovrak - [Github](https://github.com/CurtisLovrak)
 - Hadar Weinstein - [Github](https://github.com/HWein8)
+
+## Example Comparison
+
+### Without Angora Forms:
+
+customComponent1.ts
+```TypeScript
+import { Component } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+@Component({
+  selector: 'custom-comp1',
+  template: `
+    
+        <h1>{{value}}</h1>
+        <button (click)='increment()'>Increment</button>
+        <button (click)='decrement()'>Decrement</button>
+    
+  `,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: customComp1
+    }
+  ]
+})
+export class customComp1 implements ControlValueAccessor {
+
+onChange = (value: any) => { }
+onTouched = () => { }
+value = 0
+disabled = false 
+
+increment() {
+        this.value++;
+        this.onChange(this.value);
+        this.onTouched();
+    }
+decrement() {
+        this.value--;
+        this.onChange(this.value);
+        this.onTouched();
+    }
+
+writeValue(value: any) {
+    this.value = value
+  }
+  
+  registerOnChange(onChange: any) {
+    this.onChange = onChange
+  }
+  
+  registerOnTouched(onTouched: any){
+    this.onTouched = onTouched
+  }
+  
+  setDisabledState(disabled: boolean): void {
+    this.disabled = disabled
+  }
+}
+```
+customComponent2.ts
+```TypeScript
+
+import { Component } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+@Component({
+  selector: 'custom-comp2',
+  template: `
+    
+        <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+
+        <div>
+            <input class="form-control" [disabled]="true" [value]="value">
+            <button class="btn btn-primary" (click)="onClick(fileUpload)" [disabled]="disabled">Attach File</button>
+        </div>
+    
+  `,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: customComp2
+    }
+  ]
+})
+export class customComp2 implements ControlValueAccessor {
+
+onChange = (value: any) => { }
+onTouched = () => { }
+value = ''
+disabled = false 
+
+onFileSelected(event: any) {
+        const file = event.target.files[0];
+        if (file) {
+            this.value = file.name;
+            console.log(this.value);
+            this.onChange(this.value);
+        }
+    }
+onClick(fileUpload: any) {
+        this.onTouched();
+        fileUpload.click();
+    }
+
+writeValue(value: any) {
+    this.value = value
+  }
+  
+  registerOnChange(onChange: any) {
+    this.onChange = onChange
+  }
+  
+  registerOnTouched(onTouched: any){
+    this.onTouched = onTouched
+  }
+  
+  setDisabledState(disabled: boolean): void {
+    this.disabled = disabled
+  }
+}
+```
+
+### With Angora Forms:
+
+```TypeScript
+class customComp1 {
+  template = `
+        <h1>{{value}}</h1>
+        <button (click)='increment()'>Increment</button>
+        <button (click)='decrement()'>Decrement</button>
+    `;
+
+  onChange = (value: any) => {};
+
+  onTouched = () => {};
+
+  value = 0;
+
+  disabled = false
+
+  increment() {
+    this.value++;
+    this.onChange(this.value);
+    this.onTouched();
+  }
+
+  decrement() {
+    this.value--;
+    this.onChange(this.value);
+    this.onTouched();
+  }
+}
+
+class customComp2 {
+  template = `
+        <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+
+        <div>
+            <input class="form-control" [disabled]="true" [value]="value">
+            <button class="btn btn-primary" (click)="onClick(fileUpload)" [disabled]="disabled">Attach File</button>
+        </div>
+    `;
+
+  onChange = (value: any) => {};
+
+  onTouched = () => {};
+
+  value = '';
+
+  disabled = false;
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.value = file.name;
+      console.log(this.value);
+      this.onChange(this.value);
+    }
+  }
+
+  onClick(fileUpload: any) {
+    this.onTouched();
+    fileUpload.click();
+  }
+}
+
+module.exports = [hadarComp1, hadarComp2]
+```
