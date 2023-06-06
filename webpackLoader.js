@@ -6,10 +6,15 @@ const traverse = require("@babel/traverse").default;
 const generator = require("@babel/generator").default;
 const t = require("@babel/types");
 
-module.exports = function myLoader(source) {
 
+
+module.exports = function myLoader(source) {
+  // app.module.ts passed in as source parameter
+
+  // import passed in options
   const options = this.getOptions();
 
+  // object destructure the customComponents array
   const { customComponents } = options;
 
   const fileNames = []
@@ -53,13 +58,14 @@ const existingClassNames = new Set()
 traverse(ast, {
   Decorator(path) {
     // identify where new declarations will be added
+    // find the NgModule object
     if (
       t.isCallExpression(path.node.expression) &&
       t.isIdentifier(path.node.expression.callee, { name: 'NgModule' }) &&
       !modified // Check if modification has not been applied yet
     ) {
       const ngModuleArg = path.node.expression.arguments[0];
-
+      // find the declarations array
       if (t.isObjectExpression(ngModuleArg)) {
         const declarationsProp = ngModuleArg.properties.find((prop) =>
           t.isIdentifier(prop.key, { name: 'declarations' })
@@ -129,6 +135,7 @@ traverse(ast, {
 
 const newCode = `${generator(ast).code}`;
 
+// update app.module.ts with new updated code
 fs.writeFileSync("./src/app/app.module.ts", newCode)
 
 return 'done';
@@ -229,7 +236,7 @@ function generateTemplate(html) {
   `;
 }
 
-// kebab
+// kebab (change CustomComponent to custom-component)
 function toKebabCase(str) {
   return str.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
 }
@@ -257,3 +264,18 @@ function formatValue(value) {
     return value;
   }
 }
+
+
+
+// module.exports = {
+//   formatValue,
+//   generateProperties,
+//   toKebabCase,
+//   generateTemplate,
+//   typescriptIfy,
+//   generateMethods,
+//   generateAngularComponent
+// };
+
+
+
