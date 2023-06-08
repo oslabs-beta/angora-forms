@@ -24,28 +24,34 @@ Angora Forms [version number] was released on [date]. You can find more details 
 npm install angora-forms
 ```
 
-3. Configure webpackConfig.ts:
+3. Configure webpack.config.ts:
 ```typescript
 const path = require("path");
-const customComponents = require('/* path to custom components (e.g. ./src/app/customcomponent/angora.components.ts) */')
+const customComponents = require('./src/app/customComponents.ts')
 
 module.exports = {
-    mode: "development",
-    entry: ["./src/main.ts"],
-    output: {},
-    devtool: false,
-    module: {
+  mode: "development",
+  entry: ["./src/app/app.module.ts"],
+  output: {},
+  devtool: false,
+  module: {
     rules: [
-        {
+      {
         test: /\.ts$/, 
         use: [
-            {
-            loader: "angora-loader",
+          {
+            loader: "@angoraforms/angora-loader",
             options: {
-                customComponents: customComponents
-            }},
-        ]},
-    ]},
+              customComponents: customComponents
+            }
+          },
+        ],
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
 };
 ```
 
