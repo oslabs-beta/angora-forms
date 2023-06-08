@@ -1,5 +1,9 @@
-# Angora Forms
-Angora Forms is a custom form component abstraction library designed for Angular that streamlines and simplies the process of creating custom form components in Angular. 
+<div align="center">
+  <img width="400" src="https://i.ibb.co/QmqpnBL/angoralogo.png">
+</div>
+
+# Angora Form
+Angora Forms is a custom form component abstraction library designed for Angular that streamlines and simplifies the process of creating custom form components in Angular. 
 
 Custom form components in Angular comes with a bit of boilerplate code and Angora Forms components abstracts away 90.9% of that boilerplate code.
 
@@ -19,7 +23,7 @@ Angora Forms [version number] was released on [date]. You can find more details 
 ## Getting Started
 1. Install [Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
-2. Install Angora Forms [npm library link].
+2. Install Angora Forms [npm library link](https://www.npmjs.com/package/@angoraforms/angora-loader).
 ```
 npm install angora-forms
 ```
@@ -41,6 +45,7 @@ module.exports = {
         use: [
           {
             loader: "@angoraforms/angora-loader",
+
             options: {
               customComponents: customComponents
             }
@@ -71,7 +76,7 @@ class customComponent1 {
   }
 
 ```
-Each custom component class will require a tempalte, onChange, onTouched, value and disabled property.
+Each custom component class will require a template, onChange, onTouched, value and disabled property.
 
 5. Insert html into value of template within backticks. 
 
@@ -178,13 +183,6 @@ module.exports = [customComponent1, customComponent2]
 10. Run `npx webpack` in terminal before running `ng serve`.
 
 Custom component files will be generated and required modifications to the app.modules file will be made.
-
-## Contributors
-- Aaron Chen - [Github](https://github.com/achen220)
-- Ryan Hastings - [Github](https://github.com/rhaasti)
-- Wayne Leung - [Github](https://github.com/waynetwleung)
-- Curtis Lovrak - [Github](https://github.com/CurtisLovrak)
-- Hadar Weinstein - [Github](https://github.com/HWein8)
 
 ## Example Comparison
 
@@ -375,5 +373,21 @@ class customComp2 {
   }
 }
 
-module.exports = [hadarComp1, hadarComp2]
+module.exports = [customComp1, customComp2]
 ```
+## Other Information
+
+AngoraForms is in beta and will be updated in the future. 
+You should also take a look at our [website](link to website) and its github repo [web application](https://github.com/AngoraForms/AngoraFormApp)!
+
+## Contributors
+
+- Aaron Chen - [Github](https://github.com/achen220)
+- Ryan Hastings - [Github](https://github.com/rhaasti)
+- Wayne Leung - [Github](https://github.com/waynetwleung)
+- Curtis Lovrak - [Github](https://github.com/CurtisLovrak)
+- Hadar Weinstein - [Github](https://github.com/HWein8)
+
+## License
+
+This project is licensed under the MIT License.
