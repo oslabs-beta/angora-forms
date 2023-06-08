@@ -9,9 +9,12 @@ const t = require("@babel/types");
 
 
 module.exports = function myLoader(source) {
+  // app.module.ts passed in as source parameter
 
+  // import passed in options
   const options = this.getOptions();
 
+  // object destructure the customComponents array
   const { customComponents } = options;
 
   const fileNames = []
@@ -25,8 +28,6 @@ module.exports = function myLoader(source) {
     const fileName = `customComponent${index + 1}.ts`; // Generate a unique filename
     imports.push(fileName) 
 
-    console.log(this.resourcePath)
-
     // Create the file path using the current working directory and the filename
     const filePath = path.resolve(process.cwd(), fileName); // change process.cwd() to generate files into node modules?
 
@@ -39,10 +40,10 @@ module.exports = function myLoader(source) {
   });
 
 // read and stringify app.module file
-const code = fs.readFileSync("./src/app/app.module.ts").toString();
+// const code = fs.readFileSync("./src/app/app.module.ts").toString();
 
 // generate ast for app.module file
-const ast = parser.parse(code, {
+const ast = parser.parse(source, {
   sourceType: "module",
   plugins: ["typescript", "decorators-legacy"],
 });
@@ -57,13 +58,14 @@ const existingClassNames = new Set()
 traverse(ast, {
   Decorator(path) {
     // identify where new declarations will be added
+    // find the NgModule object
     if (
       t.isCallExpression(path.node.expression) &&
       t.isIdentifier(path.node.expression.callee, { name: 'NgModule' }) &&
       !modified // Check if modification has not been applied yet
     ) {
       const ngModuleArg = path.node.expression.arguments[0];
-
+      // find the declarations array
       if (t.isObjectExpression(ngModuleArg)) {
         const declarationsProp = ngModuleArg.properties.find((prop) =>
           t.isIdentifier(prop.key, { name: 'declarations' })
@@ -76,19 +78,9 @@ traverse(ast, {
           t.isArrayExpression(declarationsProp.value)
         ) {
 
-          // // Get the imported class names from the fileNames array
-          // const importedClassNames = fileNames; 
-
-          // console.log(importedClassNames)
-          // console.log(declarationsProp.value.elements.slice(-importedClassNames.length))
-
-          console.log(declarationsProp.value)
-
           for(let i = 0; i < declarationsProp.value.elements.slice(-importedClassNames.length).length; i++){
             existingClassNames.add(declarationsProp.value.elements.slice(-importedClassNames.length)[i].name)
           }
-
-          // console.log(existingClassNames)
 
           // Create an identifier for each imported class and add to the declarations array
           importedClassNames.forEach((className) => {
@@ -116,7 +108,6 @@ traverse(ast, {
     ) {
 
       let counter = 1 // initialize counter to act as input for file name 
-      // console.log(existingClassNames)
 
       importedClassNames.forEach((className) => {
         if(!path.scope.bindings[className]){
@@ -144,9 +135,10 @@ traverse(ast, {
 
 const newCode = `${generator(ast).code}`;
 
+// update app.module.ts with new updated code
 fs.writeFileSync("./src/app/app.module.ts", newCode)
 
-return source;
+return 'done';
 };
 
 
@@ -244,7 +236,7 @@ function generateTemplate(html) {
   `;
 }
 
-// kebab
+// kebab (change CustomComponent to custom-component)
 function toKebabCase(str) {
   return str.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
 }
@@ -255,7 +247,6 @@ function generateProperties(instance) {
   const properties = Object.entries(instance)
     // iterate through the class object and add the properties to the new component
     const newProps = properties.filter((el) => el[0] !== 'template').map((el) => {
-      console.log(el[1])
         if(el[0].toString() === 'onChange'){
           const position = el[1].toString().indexOf(')')
           return `${el[0]} = ${[el[1].toString().slice(0, position), typeScript, el[1].toString().slice(position)].join('')}`;
@@ -269,8 +260,6 @@ function generateProperties(instance) {
 function formatValue(value) {
   if (typeof value === "string") {
     return `'${value}'`;
-  } else if (typeof value === "boolean") {
-    return value ? "true" : "false";
   } else {
     return value;
   }
@@ -278,15 +267,15 @@ function formatValue(value) {
 
 
 
-module.exports = {
-  formatValue,
-  generateProperties,
-  toKebabCase,
-  generateTemplate,
-  typescriptIfy,
-  generateMethods,
-  generateAngularComponent
-};
+// module.exports = {
+//   formatValue,
+//   generateProperties,
+//   toKebabCase,
+//   generateTemplate,
+//   typescriptIfy,
+//   generateMethods,
+//   generateAngularComponent
+// };
 
 
 

@@ -1,7 +1,7 @@
 {
-  "name": "webpack-loader",
-  "version": "1.0.1",
-  "description": "",
+  "name": "@angoraforms/angora-loader",
+  "version": "1.0.3",
+  "description": "Angular custom form component abstractor",
   "main": "webpackLoader.js",
   "scripts": {
     "test": "jest"
