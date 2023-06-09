@@ -25,7 +25,7 @@ Angora Forms [version number] was released on [date]. You can find more details 
 
 2. Install Angora Forms [npm library link](https://www.npmjs.com/package/@angoraforms/angora-loader).
 ```
-npm install angora-forms
+npm i @angoraforms/angora-loader
 ```
 
 3. Configure webpack.config.ts:
