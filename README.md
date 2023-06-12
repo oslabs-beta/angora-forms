@@ -2,7 +2,7 @@
   <img width="400" src="https://i.ibb.co/QmqpnBL/angoralogo.png">
 </div>
 
-# Angora Form
+# Angora Forms
 Angora Forms is a custom form component abstraction library designed for Angular that streamlines and simplifies the process of creating custom form components in Angular. 
 
 Custom form components in Angular comes with a bit of boilerplate code and Angora Forms components abstracts away 90.9% of that boilerplate code.
