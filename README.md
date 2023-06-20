@@ -385,11 +385,11 @@ You should also take a look at the companion Form Builder web application and it
 
 ## Contributors
 
-- Aaron Chen - [Github](https://github.com/achen220) [Github](https://www.linkedin.com/in/aaronchen9149)
-- Ryan Hastings - [Github](https://github.com/rhaasti) [Github] (https://www.linkedin.com/in/rhaasti)
-- Wayne Leung - [Github](https://github.com/waynetwleung) [Github] (https://www.linkedin.com/in/wayne-leung-1242422a)
-- Curtis Lovrak - [Github](https://github.com/CurtisLovrak) [Github] (https://www.linkedin.com/in/curtislovrak)
-- Hadar Weinstein - [Github](https://github.com/HWein8) [Github] (https://www.linkedin.com/in/hadarweinstein)
+- Aaron Chen - [Github](https://github.com/achen220) [LinkedIn](https://www.linkedin.com/in/aaronchen9149)
+- Ryan Hastings - [Github](https://github.com/rhaasti) [LinkedIn] (https://www.linkedin.com/in/rhaasti)
+- Wayne Leung - [Github](https://github.com/waynetwleung) [LinkedIn] (https://www.linkedin.com/in/wayne-leung-1242422a)
+- Curtis Lovrak - [Github](https://github.com/CurtisLovrak) [LinkedIn] (https://www.linkedin.com/in/curtislovrak)
+- Hadar Weinstein - [Github](https://github.com/HWein8) [LinkedIn] (https://www.linkedin.com/in/hadarweinstein)
 
 ## License
 
