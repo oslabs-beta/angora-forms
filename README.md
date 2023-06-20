@@ -3,19 +3,19 @@
 </div>
 
 # Angora Forms
-Angora Forms is a custom form component abstraction library designed for Angular that streamlines and simplifies the process of creating custom form components in Angular. 
+Angora Forms is a custom form component abstraction library designed for Angular that streamlines and simplifies the process of creating reactive custom form components in Angular. 
 
-Custom form components in Angular comes with a bit of boilerplate code and Angora Forms components abstracts away 90.9% of that boilerplate code.
+Custom form components in Angular come with a bit of boilerplate code; Angora Forms' components abstract away ~90% of that boilerplate code.
 
-See [our website] or below for example code comparison.
+See https://www.angoraforms.com/ or below for example code comparison.
 
 ## Documentation
-The official documentation website is [website address].
+The official documentation website is https://www.angoraforms.com/docs.
 
-Angora Forms [version number] was released on [date]. You can find more details on [version changes address]
+Angora Forms version 1.0.4 was released on 6/20/23. You can find more details on https://www.npmjs.com/package/@angoraforms/angora-loader/v/1.0.3?activeTab=versions
 
 ## Key Features
-- **Ease of Use:** Getting started with Angora Forms is simple. Visit our documentations for a quick start up guide.
+- **Ease of Use:** Getting started with Angora Forms is simple. Visit our documentation for a quick start up guide.
 - **Static Typing:** Custom components created with our abstraction library accomodate for TypeScript to adhere to the philosophy of the Angular framework and improve overall deveoper experience.
 - **Customizable Components:** Angora Forms does not come with component styling.  Developers are free to style any components to their own tastes.
 - **Maintainability:** Custom components are aggregated in a single location with minimal boilerplate code normally required by the Angular framework, aiding maintainability and improving reviewability.
@@ -378,15 +378,18 @@ module.exports = [customComp1, customComp2]
 ## Other Information
 
 AngoraForms is in beta and will be updated in the future. 
-You should also take a look at our [website](link to website) and its github repo [web application](https://github.com/AngoraForms/AngoraFormApp)!
+
+https://medium.com/@wayneleung_2900/making-angular-custom-form-components-easier-to-work-with-e2f7ace48cb2
+
+You should also take a look at the companion Form Builder web application and its github repo https://www.angoraforms.com/FormBuilder (https://github.com/AngoraForms/AngoraFormApp)!
 
 ## Contributors
 
-- Aaron Chen - [Github](https://github.com/achen220)
-- Ryan Hastings - [Github](https://github.com/rhaasti)
-- Wayne Leung - [Github](https://github.com/waynetwleung)
-- Curtis Lovrak - [Github](https://github.com/CurtisLovrak)
-- Hadar Weinstein - [Github](https://github.com/HWein8)
+- Aaron Chen - [Github](https://github.com/achen220) [LinkedIn](https://www.linkedin.com/in/aaronchen9149)
+- Ryan Hastings - [Github](https://github.com/rhaasti) [LinkedIn] (https://www.linkedin.com/in/rhaasti)
+- Wayne Leung - [Github](https://github.com/waynetwleung) [LinkedIn] (https://www.linkedin.com/in/wayne-leung-1242422a)
+- Curtis Lovrak - [Github](https://github.com/CurtisLovrak) [LinkedIn] (https://www.linkedin.com/in/curtislovrak)
+- Hadar Weinstein - [Github](https://github.com/HWein8) [LinkedIn] (https://www.linkedin.com/in/hadarweinstein)
 
 ## License
 
