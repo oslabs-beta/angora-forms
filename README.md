@@ -12,7 +12,7 @@ See https://www.angoraforms.com/ or below for example code comparison.
 ## Documentation
 The official documentation website is https://www.angoraforms.com/docs.
 
-Angora Forms version 1.0.3 was released on 6/8/23. You can find more details on https://www.npmjs.com/package/@angoraforms/angora-loader/v/1.0.3?activeTab=versions
+Angora Forms version 1.0.4 was released on 6/20/23. You can find more details on https://www.npmjs.com/package/@angoraforms/angora-loader/v/1.0.3?activeTab=versions
 
 ## Key Features
 - **Ease of Use:** Getting started with Angora Forms is simple. Visit our documentation for a quick start up guide.
@@ -382,11 +382,11 @@ You should also take a look at the companion Form Builder web application and it
 
 ## Contributors
 
-- Aaron Chen - [Github](https://github.com/achen220)
-- Ryan Hastings - [Github](https://github.com/rhaasti)
-- Wayne Leung - [Github](https://github.com/waynetwleung)
-- Curtis Lovrak - [Github](https://github.com/CurtisLovrak)
-- Hadar Weinstein - [Github](https://github.com/HWein8)
+- Aaron Chen - [Github](https://github.com/achen220) [Github](https://www.linkedin.com/in/aaronchen9149)
+- Ryan Hastings - [Github](https://github.com/rhaasti) [Github] (https://www.linkedin.com/in/rhaasti)
+- Wayne Leung - [Github](https://github.com/waynetwleung) [Github] (https://www.linkedin.com/in/wayne-leung-1242422a)
+- Curtis Lovrak - [Github](https://github.com/CurtisLovrak) [Github] (https://www.linkedin.com/in/curtislovrak)
+- Hadar Weinstein - [Github](https://github.com/HWein8) [Github] (https://www.linkedin.com/in/hadarweinstein)
 
 ## License
 
