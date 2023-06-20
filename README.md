@@ -378,6 +378,9 @@ module.exports = [customComp1, customComp2]
 ## Other Information
 
 AngoraForms is in beta and will be updated in the future. 
+
+https://medium.com/@wayneleung_2900/making-angular-custom-form-components-easier-to-work-with-e2f7ace48cb2
+
 You should also take a look at the companion Form Builder web application and its github repo https://www.angoraforms.com/FormBuilder (https://github.com/AngoraForms/AngoraFormApp)!
 
 ## Contributors
