@@ -12,7 +12,7 @@ See https://www.angoraforms.com/ or below for example code comparison.
 ## Documentation
 The official documentation website is https://www.angoraforms.com/docs.
 
-Angora Forms version 1.0.4 was released on 6/20/23. You can find more details on https://www.npmjs.com/package/@angoraforms/angora-loader/v/1.0.3?activeTab=versions
+Angora Forms version 1.0.5 was released on 6/20/23. You can find more details on https://www.npmjs.com/package/@angoraforms/angora-loader/v/1.0.3?activeTab=versions
 
 ## Key Features
 - **Ease of Use:** Getting started with Angora Forms is simple. Visit our documentation for a quick start up guide.
@@ -381,15 +381,15 @@ AngoraForms is in beta and will be updated in the future.
 
 https://medium.com/@wayneleung_2900/making-angular-custom-form-components-easier-to-work-with-e2f7ace48cb2
 
-You should also take a look at the companion Form Builder web application and its github repo https://www.angoraforms.com/FormBuilder (https://github.com/AngoraForms/AngoraFormApp)!
+Check out the companion Form Builder web application and its github repo: https://www.angoraforms.com/FormBuilder (https://github.com/AngoraForms/AngoraFormApp)
 
 ## Contributors
 
 - Aaron Chen - [Github](https://github.com/achen220) [LinkedIn](https://www.linkedin.com/in/aaronchen9149)
-- Ryan Hastings - [Github](https://github.com/rhaasti) [LinkedIn] (https://www.linkedin.com/in/rhaasti)
-- Wayne Leung - [Github](https://github.com/waynetwleung) [LinkedIn] (https://www.linkedin.com/in/wayne-leung-1242422a)
-- Curtis Lovrak - [Github](https://github.com/CurtisLovrak) [LinkedIn] (https://www.linkedin.com/in/curtislovrak)
-- Hadar Weinstein - [Github](https://github.com/HWein8) [LinkedIn] (https://www.linkedin.com/in/hadarweinstein)
+- Ryan Hastings - [Github](https://github.com/rhaasti) [LinkedIn](https://www.linkedin.com/in/rhaasti)
+- Wayne Leung - [Github](https://github.com/waynetwleung) [LinkedIn](https://www.linkedin.com/in/wayne-leung-1242422a)
+- Curtis Lovrak - [Github](https://github.com/CurtisLovrak) [LinkedIn](https://www.linkedin.com/in/curtislovrak)
+- Hadar Weinstein - [Github](https://github.com/HWein8) [LinkedIn](https://www.linkedin.com/in/hadarweinstein)
 
 ## License
 
