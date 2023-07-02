@@ -2,28 +2,31 @@
   <img width="400" src="https://i.ibb.co/QmqpnBL/angoralogo.png">
 </div>
 
-# Angora Forms
-Angora Forms is a custom form component abstraction library designed for Angular that streamlines and simplifies the process of creating reactive custom form components in Angular. 
+# AngoraForms
+AngoraForms is a custom form component abstraction library designed for Angular that streamlines and simplifies the process of creating reactive custom form components in Angular. 
 
-Custom form components in Angular come with a bit of boilerplate code; Angora Forms' components abstract away ~90% of that boilerplate code.
+Custom form components in Angular come with a bit of boilerplate code; AngoraForms' components abstract away ~90% of that boilerplate code.
 
 See https://www.angoraforms.com/ or below for example code comparison.
+
+## Version 1.0.6
+Minor readme, branding update.
 
 ## Documentation
 The official documentation website is https://www.angoraforms.com/docs.
 
-Angora Forms version 1.0.5 was released on 6/20/23. You can find more details on https://www.npmjs.com/package/@angoraforms/angora-loader/v/1.0.3?activeTab=versions
+AngoraForms version 1.0.6 was released on 7/02/23. You can find more details on https://www.npmjs.com/package/@angoraforms/angora-loader/v/1.0.3?activeTab=versions
 
 ## Key Features
-- **Ease of Use:** Getting started with Angora Forms is simple. Visit our documentation for a quick start up guide.
+- **Ease of Use:** Getting started with AngoraForms is simple. Visit our documentation for a quick start up guide.
 - **Static Typing:** Custom components created with our abstraction library accomodate for TypeScript to adhere to the philosophy of the Angular framework and improve overall deveoper experience.
-- **Customizable Components:** Angora Forms does not come with component styling.  Developers are free to style any components to their own tastes.
+- **Customizable Components:** AngoraForms does not come with component styling.  Developers are free to style any components to their own tastes.
 - **Maintainability:** Custom components are aggregated in a single location with minimal boilerplate code normally required by the Angular framework, aiding maintainability and improving reviewability.
 
 ## Getting Started
 1. Install [Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
-2. Install Angora Forms [npm library link](https://www.npmjs.com/package/@angoraforms/angora-loader).
+2. Install AngoraForms [npm library link](https://www.npmjs.com/package/@angoraforms/angora-loader).
 ```
 npm i @angoraforms/angora-loader
 ```
@@ -186,7 +189,7 @@ Custom component files will be generated and required modifications to the app.m
 
 ## Example Comparison
 
-### Without Angora Forms:
+### Without AngoraForms:
 
 customComponent1.ts
 ```TypeScript
@@ -385,11 +388,11 @@ Check out the companion Form Builder web application and its github repo: https:
 
 ## Contributors
 
-- Aaron Chen - [Github](https://github.com/achen220) [LinkedIn](https://www.linkedin.com/in/aaronchen9149)
-- Ryan Hastings - [Github](https://github.com/rhaasti) [LinkedIn](https://www.linkedin.com/in/rhaasti)
-- Wayne Leung - [Github](https://github.com/waynetwleung) [LinkedIn](https://www.linkedin.com/in/wayne-leung-1242422a)
-- Curtis Lovrak - [Github](https://github.com/CurtisLovrak) [LinkedIn](https://www.linkedin.com/in/curtislovrak)
-- Hadar Weinstein - [Github](https://github.com/HWein8) [LinkedIn](https://www.linkedin.com/in/hadarweinstein)
+- Aaron Chen - [Github](https://github.com/achen220) / [LinkedIn](https://www.linkedin.com/in/aaronchen9149)
+- Ryan Hastings - [Github](https://github.com/rhaasti) / [LinkedIn](https://www.linkedin.com/in/rhaasti)
+- Wayne Leung - [Github](https://github.com/waynetwleung) / [LinkedIn](https://www.linkedin.com/in/wayne-leung-1242422a)
+- Curtis Lovrak - [Github](https://github.com/CurtisLovrak) / [LinkedIn](https://www.linkedin.com/in/curtislovrak)
+- Hadar Weinstein - [Github](https://github.com/HWein8) / [LinkedIn](https://www.linkedin.com/in/hadarweinstein)
 
 ## License
 
